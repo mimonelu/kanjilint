@@ -2,10 +2,27 @@
   "name": "kanjilint",
   "version": "1.0.0",
   "description": "入力から常用漢字以外の漢字を出力するCLIです。",
-  "author": "mimonelu",
+  "keywords": [
+    "cli",
+    "japanese",
+    "language",
+    "kanji",
+    "lint"
+  ],
+  "homepage": "https://github.com/mimonelu/kanjilint",
+  "bugs": {
+    "url": "https://github.com/mimonelu/kanjilint/issues",
+    "email": "mimonelu@gmail.com"
+  },
   "license": "MIT",
+  "author": "mimonelu <mimonelu@gmail.com> (https://mimonelu.github.io)",
+  "main": "lib/api.js",
   "bin": {
     "kanjilint": "bin/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mimonelu/kanjilint.git"
   },
   "scripts": {
     "init": "node ./lib/make.js"
