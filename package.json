@@ -1,0 +1,22 @@
+{
+  "name": "kanjilint",
+  "version": "1.0.0",
+  "description": "入力から常用漢字以外の漢字を出力するCLIです。",
+  "author": "mimonelu",
+  "license": "MIT",
+  "bin": {
+    "kanjilint": "bin/cli.js"
+  },
+  "scripts": {
+    "init": "node ./lib/make.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "commander": "^2.18.0",
+    "encoding-japanese": "^1.0.29",
+    "fs-extra": "^7.0.0",
+    "glob": "^7.1.3",
+    "is-binary": "^0.1.0",
+    "request": "^2.88.0"
+  }
+}
