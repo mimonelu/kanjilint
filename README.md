@@ -2,10 +2,11 @@
 
 ## 概要
 
-* 入力から常用漢字以外の漢字を出力するCLIです。
+* 入力から常用漢字以外の漢字を出力するNodeJSのCLIです。
 * [文化庁の開示している常用漢字表（平成22年内閣告示第2号）](http://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/index.html)はPDFであるため解析が難しく、代わりに[Wikipediaの常用漢字表](https://ja.wikipedia.org/wiki/%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97%E4%B8%80%E8%A6%A7)を解析、利用しています。つまりWikipediaの内容に問題がある場合、当プログラムの挙動にも問題が発生します。
 * 2018年現在、すべての教育漢字が常用漢字であるかどうかがわからないため、[学年別漢字配当表](https://ja.wikipedia.org/wiki/%E5%AD%A6%E5%B9%B4%E5%88%A5%E6%BC%A2%E5%AD%97%E9%85%8D%E5%BD%93%E8%A1%A8)は考慮していません。
 * ここでの漢字とは、Unicodeにおける4E00から9FA5（ `一-龥` ）を指します。他の文字は処理の対象になりません。
+* バイナリファイルは処理の対象になりません。
 
 ## インストール
 
@@ -23,14 +24,14 @@ $ npm i --save-dev kanjilint
 $ npx kanjilint -v
 ```
 
-## 使い方
+## 使用例
 
 * `$ kanjilint -v` バージョンを表示します。
 * `$ kanjilint sample.txt` `sample.txt` を処理します（標準出力に結果を表示します）。
-* `$ kanjilint "sample/**/*.txt"` `sample` フォルダ以下のすべての.txtファイルを処理します。  
+* `$ kanjilint "components/**/*.vue"` `components` フォルダ以下のすべての.vueファイルを処理します。  
 パスの指定については[glob](https://www.npmjs.com/package/glob)を参照してください。  
 また、globの記法に準拠する場合、パスをクォーテーションで囲む必要があるかもしれません。
-* `$ kanjilint "sample/**/*.txt" -e node_modules -o result.txt -f text -q 32` オプション（後述）を付けて処理します。
+* `$ kanjilint "**/*.html" -e node_modules -o result.txt -f text -q 32` オプション（後述）を付けて処理します。
 
 ### オプション
 
