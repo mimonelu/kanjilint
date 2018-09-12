@@ -1,6 +1,6 @@
 {
   "name": "kanjilint",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "入力から常用漢字以外の漢字を出力するCLIです。",
   "keywords": [
     "cli",
@@ -18,14 +18,15 @@
   "author": "mimonelu <mimonelu@gmail.com> (https://mimonelu.github.io)",
   "main": "lib/api.js",
   "bin": {
-    "kanjilint": "bin/cli.js"
+    "kanjilint": "bin/kanjilint"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mimonelu/kanjilint.git"
   },
   "scripts": {
-    "init": "node ./lib/make.js"
+    "make": "node -e \"require('./lib/api').make('./list.json');\"",
+    "test": "node -p \"require('./lib/api').parse('「ではみなさんは、そういうふうに川だと云われたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。」先生は、黒板に吊した大きな黒い星座の図の、上から下へ白くけぶった銀河帯のようなところを指しながら、みんなに問をかけました。');\""
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",

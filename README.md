@@ -42,26 +42,44 @@ $ npx kanjilint -v
 * `-o, --output <s>` 出力ファイルのパスを指定します（デフォルトで標準出力）。
 * `-f, --format <s>` 出力フォーマットを `json` と `text` から指定します（デフォルトで `text` ）。
 * `-q, --quotation <n>` 出力に記載する引用文の長さを指定します（デフォルトで `32` ）。 `0` で記載しません。
-* `-h, --help`
+* `-h, --help` ヘルプを表示します。
 
-## その他
+## API
 
-### 常用漢字データの更新
-
-常用漢字が更新され、かつ、前述のWikipediaも更新された場合、 `lib/make.js` を起動してください。  
-同ページをスクレイピングし、 `list.json` ファイルを生成します。
-
-### API
-
-現状 `parse` 関数のみ利用可能です。  
-[RunKit](https://npm.runkit.com/kanjilint)でお試しください。
+現状2つの関数があります。
 
 ```
 const kanjilint = require('kanjilint');
-const text = '私が良く使うフォントは游ゴシックです。\n好きな植物は櫻です。';
-const results = kanjilint.parse(text);
+```
+
+* `make(output)`
+
+処理の判断基準となる `list.json` ファイルを生成します。  
+常用漢字が更新され、かつ、前述のWikipediaも更新された場合、 `npm run make` を起動してください。  
+同ページをスクレイピングし、 `list.json` ファイルを再生成します。
+
+* `parse(text)`
+
+文字列から非常用漢字などを抽出し、結果を返します。  
+`npm test` もしくは [RunKit](https://npm.runkit.com/kanjilint)で以下のコードをお試しください。
+
+```
+const kanjilint = require('kanjilint');
+const results = kanjilint.parse('私が良く使うフォントは游ゴシックです。\n好きな植物は櫻です。');
 console.log(results);
 ```
+
+## 更新履歴
+
+### 1.0.1
+
+* `bin/cli.js` → `bin/kanjilint`
+* `list.json` の出力先を変更。
+* `lib/make.js` をAPIに移行。関連して `npm run make` を追加。
+
+### 1.0.0
+
+* リリース。
 
 ## お問い合わせ
 

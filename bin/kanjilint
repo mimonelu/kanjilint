@@ -7,8 +7,9 @@ const messages = {
 };
 
 const program = require('commander');
+const { version } = require('../package.json');
 program
-  .version('1.0.0', '-v, --version')
+  .version(version, '-v, --version')
   .usage('<file> [options]\ne.g. kanjilint "sample/**/*.txt" -e node_modules -o result.txt -f text -q 32')
   .option('-e, --exclude <s>', 'set a string to exclude specific file path')
   .option('-o, --output <s>', 'set output file path (default: standard output)')
