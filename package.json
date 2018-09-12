@@ -1,6 +1,6 @@
 {
   "name": "kanjilint",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "入力から常用漢字以外の漢字を出力するCLIです。",
   "keywords": [
     "cli",

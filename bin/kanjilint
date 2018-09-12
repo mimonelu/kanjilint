@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const messages = {
-  'deleted': '削除された常用漢字です',
-  'old': '常用漢字「__KANJI__」の旧字体です',
-  'uncommon': '常用漢字ではありません'
+  'deleted':       '削除された常用漢字です',
+  'old':           '常用漢字「__KANJI__」の旧字体です',
+  'uncommon':      '常用漢字ではありません',
+  'press_added':   '常用漢字ではありませんが、新聞常用漢字です',
+  'press_deleted': '常用漢字ですが、新聞常用漢字では削除されています'
 };
 
 const program = require('commander');
@@ -11,10 +13,11 @@ const { version } = require('../package.json');
 program
   .version(version, '-v, --version')
   .usage('<file> [options]\ne.g. kanjilint "sample/**/*.txt" -e node_modules -o result.txt -f text -q 32')
-  .option('-e, --exclude <s>', 'set a string to exclude specific file path')
-  .option('-o, --output <s>', 'set output file path (default: standard output)')
-  .option('-f, --format <s>', 'set output file format (json/text)', 'text')
-  .option('-q, --quotation <n>', 'set quotation length', (v) => parseInt(v, 10), 32)
+  .option('-e, --exclude <s>', 'この文字列を含むファイルパスは処理されません。')
+  .option('-p, --press <p>', '新聞常用漢字も検出するかどうか指定します。', (v) => v.toLowerCase() === 'true', true)
+  .option('-o, --output <s>', '出力ファイルのパスを指定します（デフォルトで標準出力）。')
+  .option('-f, --format <s>', '出力フォーマットを `json` と `text` から指定します。', 'text')
+  .option('-q, --quotation <n>', '出力に記載する引用文の長さを指定します。 `0` で記載しません。', (v) => parseInt(v, 10), 32)
   .parse(process.argv);
 
 const methods = {
@@ -65,7 +68,7 @@ if (program.args[0] == null) {
         buffer = Buffer.from(buffer).toString();
         if (isBinary(buffer) === false) {
           textHash[file] = buffer;
-          const results = kanji.parse(buffer);
+          const results = kanji.parse(buffer, program.press);
           if (results.length > 0) {
             dataList.push({ file, results });
           }
