@@ -2,7 +2,7 @@
 
 ## 概要
 
-入力から常用漢字以外の漢字を出力するNodeJSのAPI/CLIです。「漢字の利用規則を統一し、コンテンツの品質を高めること」を目的としています。  
+入力から常用漢字以外の漢字を出力する NodeJS の API/CLI です。「漢字の利用規則を統一し、コンテンツの品質を高めること」を目的としています。  
 具体的には以下の漢字を検出します。
 
 * 非常用漢字
@@ -13,12 +13,13 @@
 
 ## 詳細
 
-* [文化庁の開示している常用漢字表（平成22年内閣告示第2号）](http://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/index.html)はPDFであるため解析が難しく、代わりに[Wikipediaの「常用漢字一覧」ページ](https://ja.wikipedia.org/wiki/%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97%E4%B8%80%E8%A6%A7)を解析、利用しています。つまりWikipediaの内容に問題がある場合、当プログラムの挙動にも問題が発生します。
-* 新聞常用漢字についても、[Wikipediaの「新聞常用漢字表」ページ](https://ja.wikipedia.org/wiki/%E6%96%B0%E8%81%9E%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97%E8%A1%A8)を参考にしています。
+* [文化庁の開示している常用漢字表（平成22年内閣告示第2号）](http://www.bunka.go.jp/kokugo_nihongo/sisaku/joho/joho/kijun/naikaku/kanji/index.html)は解析が難しいため、代わりに [Wikipedia の「常用漢字一覧」ページ](https://ja.wikipedia.org/wiki/%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97%E4%B8%80%E8%A6%A7)を解析、利用しています。つまり Wikipedia の内容に問題がある場合、当プログラムの挙動にも問題が発生します。
+* 新聞常用漢字についても、 [Wikipedia の「新聞常用漢字表」ページ](https://ja.wikipedia.org/wiki/%E6%96%B0%E8%81%9E%E5%B8%B8%E7%94%A8%E6%BC%A2%E5%AD%97%E8%A1%A8)を参考にしています。
 * いわゆる教育漢字については、すべての教育漢字が常用漢字であるかどうかがわからないため、[学年別漢字配当表](https://ja.wikipedia.org/wiki/%E5%AD%A6%E5%B9%B4%E5%88%A5%E6%BC%A2%E5%AD%97%E9%85%8D%E5%BD%93%E8%A1%A8)は考慮していません。
 * 検出対象となるのは漢字そのものだけであり、音訓などは考慮していません。
-* ここでの漢字とは、Unicodeにおける4E00から9FA5（ `一-龥` ）を指します。他の文字は処理の対象になりません。
+* ここでの漢字とは、 Unicode における 4E00 から 9FA5 （ `一-龥` ）を指します。他の文字は処理の対象になりません。
 * バイナリファイルは処理の対象になりません。
+* 文字コードは自動的に判別します。
 
 ## インストール
 
@@ -40,9 +41,9 @@ $ npx kanjilint -v
 
 * `$ kanjilint -v` バージョンを表示します。
 * `$ kanjilint sample.txt` `sample.txt` を処理します（標準出力に結果を表示します）。
-* `$ kanjilint "components/**/*.vue"` `components` フォルダ以下のすべての.vueファイルを処理します。  
-パスの指定については[glob](https://www.npmjs.com/package/glob)を参照してください。  
-また、globの記法に準拠する場合、パスをクォーテーションで囲む必要があるかもしれません。
+* `$ kanjilint "components/**/*.vue"` `components` フォルダ以下のすべての .vue ファイルを処理します。  
+パスの指定については [glob](https://www.npmjs.com/package/glob) を参照してください。  
+また、 glob の記法に準拠する場合、パスをクォーテーションで囲む必要があるかもしれません。
 * `$ kanjilint "**/*.html" -e node_modules -o result.txt -q 64` オプション（後述）を付けて処理します。
 
 ### オプション
@@ -57,7 +58,7 @@ $ npx kanjilint -v
 
 ## API
 
-現状2つの関数があります。
+現状 2 つの関数があります。
 
 ```
 const kanjilint = require('kanjilint');
@@ -66,13 +67,13 @@ const kanjilint = require('kanjilint');
 * `make(output)`
 
 処理の判断基準となる `list.json` ファイルを生成します。  
-常用漢字が更新され、かつ、前述のWikipediaも更新された場合、 `npm run make` を起動してください。同ページをスクレイピングし、 `list.json` ファイルを再生成します。  
+常用漢字が更新され、かつ、前述の Wikipedia も更新された場合、 `npm run make` を起動してください。同ページをスクレイピングし、 `list.json` ファイルを再生成します。  
 この際、新聞常用漢字の情報を記した `lib/press.json` の内容も `list.json` に反映されます。
 
 * `parse(text, isPress = true)`
 
 文字列から非常用漢字などを抽出し、結果を返します。  
-`npm test` もしくは [RunKit](https://npm.runkit.com/kanjilint)で以下のコードをお試しください。
+`npm test` もしくは [RunKit](https://npm.runkit.com/kanjilint) で以下のコードをお試しください。
 
 ```
 const kanjilint = require('kanjilint');
@@ -90,7 +91,7 @@ console.log(results);
 
 * `bin/cli.js` → `bin/kanjilint`
 * `list.json` の出力先を変更。
-* `lib/make.js` をAPIに移行。関連して `npm run make` を追加。
+* `lib/make.js` を API に移行。関連して `npm run make` を追加。
 
 ### 1.0.0
 
